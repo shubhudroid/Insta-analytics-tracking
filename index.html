@@ -5,13 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Links</title>
 
-  <!-- Google Analytics -->
+  <!-- Google Analytics (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VD9XX8VWLC"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+
     gtag('js', new Date());
-    gtag('config', 'G-VD9XX8VWLC');
+
+    gtag('config', 'G-VD9XX8VWLC', {
+      page_path: window.location.hash
+    });
+
+    // Force page_view for SPA + UTM tracking accuracy
+    gtag('event', 'page_view', {
+      page_location: window.location.href,
+      page_path: window.location.hash
+    });
   </script>
 
   <!-- Google Font -->
@@ -73,6 +83,7 @@
       border-radius: 12px;
       font-weight: 600;
       transition: all 0.2s ease;
+      cursor: pointer;
     }
 
     .link:hover {
@@ -92,7 +103,7 @@
 
   <div class="container">
 
-    <!-- Profile Section -->
+    <!-- Profile -->
     <div class="profile">
       <img src="https://raw.githubusercontent.com/shubhudroid/Insta-analytics-tracking/main/image1.jpeg" alt="profile">
       <h1>Shubham Singh Rajput😎</h1>
@@ -100,13 +111,13 @@
     </div>
 
     <!-- Links -->
-    <a href="#" class="link" onclick="trackClick('spotify','https://open.spotify.com/playlist/2LBPNxBNqn6m2bKpvwljuh?si=Ei8r5qNeRGOk4aBHXfzIZw&pi=Ai-QJoB7T2-p5&nd=1&dlsi=2d9aa3e398164eaf')">
-      🎧🎶Current Mood
-    </a>
+    <div class="link" onclick="trackClick('spotify','https://open.spotify.com/playlist/2LBPNxBNqn6m2bKpvwljuh?si=Ei8r5qNeRGOk4aBHXfzIZw')">
+      🎧🎶 Current Mood
+    </div>
 
-    <a href="#" class="link" onclick="trackClick('linkedin','https://www.linkedin.com/in/shubhamsingh124/')">
-      💼Switch to my Professional workspace
-    </a>
+    <div class="link" onclick="trackClick('linkedin','https://www.linkedin.com/in/shubhamsingh124/')">
+      💼 Switch to my Professional workspace
+    </div>
 
     <!-- Footer -->
     <div class="footer">
@@ -118,14 +129,17 @@
   <!-- Tracking Script -->
   <script>
     function trackClick(name, url) {
-      gtag('event', 'click_' + name, {
-        event_category: 'outbound',
-        event_label: name
+      // GA4 event (recommended format)
+      gtag('event', 'select_content', {
+        content_type: 'link',
+        item_id: name,
+        event_category: 'outbound'
       });
 
+      // small delay to ensure event is sent before redirect
       setTimeout(function() {
         window.location.href = url;
-      }, 300);
+      }, 200);
     }
   </script>
 
