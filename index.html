@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Instagram Traffic Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Links</title>
 
-  <!-- Google Analytics (GA4) -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VD9XX8VWLC"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -11,21 +13,121 @@
     gtag('js', new Date());
     gtag('config', 'G-VD9XX8VWLC');
   </script>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1d2671, #c33764);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .profile {
+      margin-bottom: 30px;
+    }
+
+    .profile img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 3px solid white;
+      margin-bottom: 10px;
+    }
+
+    .profile h1 {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .profile p {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .link {
+      display: block;
+      background: white;
+      color: #333;
+      text-decoration: none;
+      padding: 14px;
+      margin: 12px 0;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .link:hover {
+      transform: scale(1.04);
+      background: #f1f1f1;
+    }
+
+    .footer {
+      margin-top: 25px;
+      font-size: 12px;
+      opacity: 0.7;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Welcome from Instagram 👋</h1>
-  <p>Thanks for visiting!</p>
 
-  <a href="https://your-main-site.com" id="mainLink">Go to Main Website</a>
+  <div class="container">
 
+    <!-- Profile Section -->
+    <div class="profile">
+      <img src="https://via.placeholder.com/100" alt="profile">
+      <h1>Shubham Singh Rajput😎</h1>
+      <p>Shree Harivanshh❤️</p>
+    </div>
+
+    <!-- Links -->
+    <a href="#" class="link" onclick="trackClick('spotify','https://spotify.com/yourprofile')">
+      🎧🎶Current Mood
+    </a>
+
+    <a href="#" class="link" onclick="trackClick('linkedin','https://linkedin.com/in/yourprofile')">
+      💼Switch to my Professional workspace
+    </a>
+
+    <!-- Footer -->
+    <div class="footer">
+      Thanks for visiting 👋
+    </div>
+
+  </div>
+
+  <!-- Tracking Script -->
   <script>
-    document.getElementById("mainLink").addEventListener("click", function() {
-      gtag('event', 'click_main_link', {
+    function trackClick(name, url) {
+      gtag('event', 'click_' + name, {
         event_category: 'outbound',
-        event_label: 'main_site'
+        event_label: name
       });
-    });
+
+      setTimeout(function() {
+        window.location.href = url;
+      }, 300);
+    }
   </script>
+
 </body>
 </html>
