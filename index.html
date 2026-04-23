@@ -17,7 +17,6 @@
       page_path: window.location.hash
     });
 
-    // Force page_view for SPA + UTM tracking accuracy
     gtag('event', 'page_view', {
       page_location: window.location.href,
       page_path: window.location.hash
@@ -110,13 +109,27 @@
       <p>Shree Harivanshh❤️</p>
     </div>
 
-    <!-- Links -->
+    <!-- Existing Links -->
     <div class="link" onclick="trackClick('spotify','https://open.spotify.com/playlist/2LBPNxBNqn6m2bKpvwljuh?si=Ei8r5qNeRGOk4aBHXfzIZw')">
-      🎧🎶Missing😐😒
+      🎧🎶 Missing😐😒
     </div>
 
     <div class="link" onclick="trackClick('linkedin','https://www.linkedin.com/in/shubhamsingh124/')">
       💼 Switch to my Professional workspace
+    </div>
+
+    <!-- NEW CONTACT BUTTONS -->
+
+    <!-- <div class="link" onclick="contactClick('whatsapp','https://wa.me/91XXXXXXXXXX?text=Hey%20I%20found%20your%20website')">
+      💬 Message me on WhatsApp
+    </div> -->
+
+    <div class="link" onclick="contactClick('instagram','https://ig.me/m/__hit_sharnam__')">
+      📩 Message me on Instagram
+    </div>
+
+    <div class="link" onclick="contactClick('email','mailto:shubhamsinghksecure@gmail.com?subject=Hello&body=I%20visited%20your%20website')">
+      📧 Send me Email
     </div>
 
     <!-- Footer -->
@@ -128,19 +141,31 @@
 
   <!-- Tracking Script -->
   <script>
+
+    // Existing tracking (links)
     function trackClick(name, url) {
-      // GA4 event (recommended format)
       gtag('event', 'select_content', {
         content_type: 'link',
         item_id: name,
         event_category: 'outbound'
       });
 
-      // small delay to ensure event is sent before redirect
       setTimeout(function() {
         window.location.href = url;
       }, 200);
     }
+
+    // NEW: Contact tracking
+    function contactClick(method, url) {
+      gtag('event', 'contact_click', {
+        method: method
+      });
+
+      setTimeout(function() {
+        window.open(url, '_blank');
+      }, 200);
+    }
+
   </script>
 
 </body>
